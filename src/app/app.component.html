@@ -1,0 +1,47 @@
+<div class="header">
+
+    <span class="header-title">MasterShop</span>
+
+    <span class="header-cart" (click)="toggleCart()">KORPA</span>
+</div>
+<div class="shopping-cart-container" *ngIf="showCart">
+    <shopping-cart [data]="cartList"></shopping-cart>
+</div>
+<div class="content">
+    <div *ngIf="!showEditForm">
+        <div class="categories">
+            <div>
+                <p><b><u>Kategorije</u></b></p>
+                <div *ngFor="let category of categories">
+                    <a (click)="filterCategory(category)">{{category}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="product-list">
+            <div>
+                <button (click)="toggleEditForm()">DODAJ PROIZVOD</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Naziv</th>
+                            <th>Cena</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of data; let i = index">
+                            <td>{{i+1}} </td>
+                            <td>{{product.title | uppercase}} </td>
+                            <td class="text-right">{{product.price| number : '1.2-2'}} €</td>
+                            <td (click)="addToCart(product)"> <button>DODAJ U KORPU</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="edit-product-container" *ngIf="showEditForm">
+        <edit-product (closeFormClicked)="toggleEditForm()"></edit-product>
+    </div>
+</div>

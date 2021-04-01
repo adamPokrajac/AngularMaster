@@ -1,0 +1,25 @@
+<h3>
+    Korpa:</h3>
+<table *ngIf="data.length > 0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Naziv</th>
+            <th>Cena</th>
+            <th>Količina</th>
+            <th>Ukupna cena</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of data; let i = index">
+            <td>{{i+1}} </td>
+            <td>{{product.title | slice:0:20 | uppercase }} </td>
+            <td class="text-right">{{product.price | number : '1.2-2'}} €</td>
+            <td>{{product.quantity}}</td>
+            <td class="text-right">{{product.quantity * product.price | number : '1.2-2'}} €</td>
+        </tr>
+    </tbody>
+
+</table>
+
+<p *ngIf="data.length == 0">Korpa je prazna</p>

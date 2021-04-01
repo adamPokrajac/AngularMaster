@@ -1,0 +1,41 @@
+<form #form1="ngForm" (ngSubmit)="onSubmit(form1)">
+    <div style="margin-top: 10px;">
+        <label for="ime">Naziv </label>
+
+        <input id="title" name="title" class="form-control" required minlength="4" [(ngModel)]="data.title" #title="ngModel" autocomplete="off">
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error-field">
+
+            <div *ngIf="title.errors!.required">
+                Naziv je obavezan!
+            </div>
+            <div *ngIf="title.errors!.minlength">
+                Naziv mora da ima najmanje 4 karaktera!
+            </div>
+        </div>
+
+    </div>
+    <div style="margin-top: 10px;">
+        <label for="prezime">Cena </label>
+        <input type="text" [(ngModel)]="data.price" name="price">
+
+    </div>
+    <div style="margin-top: 10px;">
+        <label for="prezime">Kategorija </label>
+        <select name="category" [(ngModel)]="data.category" required #category="ngModel">
+            <option></option>
+            <option *ngFor="let item of categories">
+            {{item}}
+            </option>
+            </select>
+        <div *ngIf="category.invalid && (category.dirty || category.touched)" class="error-field">
+            Kategorija je obavezna!
+        </div>
+
+    </div>
+
+
+    <div style="margin-top: 10px;">
+        <button type="submit" [disabled]="form1.invalid">Posalji</button>
+        <button (click)="closeForm()">ZATVORI</button>
+    </div>
+</form>
